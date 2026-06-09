@@ -5,10 +5,14 @@ import {
   getExpenses,
   updateExpense,
 } from '../controllers/expenseController.js';
+import {
+  validateCreateExpense,
+  validateUpdateExpense,
+} from '../middlewares/validateExpense.js';
 
 const router = Router();
 
-router.route('/').get(getExpenses).post(createExpense);
-router.route('/:id').put(updateExpense).delete(deleteExpense);
+router.route('/').get(getExpenses).post(validateCreateExpense, createExpense);
+router.route('/:id').put(validateUpdateExpense, updateExpense).delete(deleteExpense);
 
 export default router;
