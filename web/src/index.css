@@ -222,6 +222,134 @@ textarea {
   text-align: center;
 }
 
+.expense-form {
+  display: grid;
+  gap: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field-wide {
+  grid-column: 1 / -1;
+}
+
+.field span {
+  color: #304039;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #c9d5ce;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #101815;
+  outline: none;
+  padding: 10px 12px;
+}
+
+.field textarea {
+  min-height: 104px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: #126149;
+  box-shadow: 0 0 0 3px rgba(18, 97, 73, 0.14);
+}
+
+.field input[aria-invalid="true"],
+.field select[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-color: #bd3737;
+}
+
+.field small {
+  color: #a12d2d;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.form-message {
+  min-height: 22px;
+  margin: 0;
+  color: #68766f;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.form-message.success {
+  color: #126149;
+}
+
+.form-message.error {
+  color: #a12d2d;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 10px 16px;
+}
+
+.primary-button {
+  background: #126149;
+  color: #ffffff;
+}
+
+.primary-button:hover {
+  background: #0d4d39;
+}
+
+.primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.secondary-button {
+  border-color: #c9d5ce;
+  background: #ffffff;
+  color: #304039;
+}
+
+.secondary-button:hover {
+  background: #f4f7f5;
+}
+
 @media (max-width: 860px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -246,6 +374,24 @@ textarea {
 
   .summary-grid {
     grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .primary-button,
+  .secondary-button {
+    flex: 1;
   }
 }
 

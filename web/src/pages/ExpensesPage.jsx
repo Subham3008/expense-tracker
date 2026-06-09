@@ -1,3 +1,5 @@
+import ExpenseForm from '../components/ExpenseForm.jsx';
+
 const ExpensesPage = () => {
   return (
     <section className="page">
@@ -7,6 +9,14 @@ const ExpensesPage = () => {
           <h2>Expenses</h2>
         </div>
       </header>
+
+      <section className="panel">
+        <div>
+          <p className="section-kicker">Capture</p>
+          <h3>Add expense</h3>
+        </div>
+        <ExpenseForm />
+      </section>
 
       <section className="panel">
         <div>
