@@ -222,6 +222,104 @@ textarea {
   text-align: center;
 }
 
+.error-panel {
+  border-color: #e4b5b5;
+  background: #fff7f7;
+}
+
+.error-panel p {
+  color: #a12d2d;
+  font-weight: 700;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #dbe4de;
+  border-radius: 8px;
+}
+
+.expense-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e6eee9;
+  color: #304039;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.expense-table th {
+  background: #f8faf8;
+  color: #68766f;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.expense-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.amount-cell {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.actions-cell {
+  width: 168px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  background: #e4eee8;
+  color: #0f513d;
+  font-size: 0.86rem;
+  font-weight: 800;
+  padding: 4px 10px;
+}
+
+.text-button,
+.danger-button {
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 7px 10px;
+}
+
+.text-button {
+  background: #eef5f1;
+  color: #126149;
+}
+
+.text-button:hover {
+  background: #dbeadf;
+}
+
+.danger-button {
+  margin-left: 8px;
+  background: #fff0f0;
+  color: #a12d2d;
+}
+
+.danger-button:hover {
+  background: #ffe0e0;
+}
+
 .expense-form {
   display: grid;
   gap: 18px;

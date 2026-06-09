@@ -1,6 +1,6 @@
 import { EXPENSE_CATEGORIES, useExpenseForm } from '../hooks/useExpenseForm.js';
 
-const ExpenseForm = ({ initialExpense, onSuccess }) => {
+const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
   const {
     errors,
     handleChange,
@@ -84,8 +84,8 @@ const ExpenseForm = ({ initialExpense, onSuccess }) => {
           {message}
         </p>
         <div className="form-actions">
-          <button className="secondary-button" onClick={resetForm} type="button">
-            Reset
+          <button className="secondary-button" onClick={isEditing ? onCancel : resetForm} type="button">
+            {isEditing ? 'Cancel edit' : 'Reset'}
           </button>
           <button className="primary-button" disabled={isSubmitting} type="submit">
             {isSubmitting ? 'Saving...' : isEditing ? 'Update expense' : 'Add expense'}

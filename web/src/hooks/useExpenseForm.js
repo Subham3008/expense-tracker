@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { createExpense, updateExpense } from '../services/expenseApi.js';
 
 export const EXPENSE_CATEGORIES = ['Food', 'Transport', 'Bills', 'Entertainment', 'Other'];
@@ -60,6 +60,13 @@ export const useExpenseForm = ({ initialExpense, onSuccess } = {}) => {
 
   const isEditing = Boolean(initialExpense?._id);
   const maxDate = useMemo(() => today(), []);
+
+  useEffect(() => {
+    setValues(toFormValues(initialExpense));
+    setErrors({});
+    setMessage('');
+    setStatus('idle');
+  }, [initialExpense]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
