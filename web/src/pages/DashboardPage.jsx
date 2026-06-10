@@ -1,5 +1,6 @@
 import BudgetTracker from '../components/BudgetTracker.jsx';
 import CategoryChart from '../components/CategoryChart.jsx';
+import EmptyState from '../components/EmptyState.jsx';
 import MonthlyInsights from '../components/MonthlyInsights.jsx';
 import { useDashboardSummary } from '../hooks/useDashboardSummary.js';
 
@@ -77,14 +78,14 @@ const DashboardPage = () => {
           <h3>Monthly spending signals</h3>
         </div>
         {isLoading ? (
-          <div className="empty-panel">
-            <p>Loading monthly insights...</p>
-          </div>
+          <EmptyState
+            description="Calculating monthly pace, projection, and trend."
+            title="Loading monthly insights"
+            tone="loading"
+          />
         ) : null}
         {isError ? (
-          <div className="empty-panel error-panel">
-            <p>{error}</p>
-          </div>
+          <EmptyState description={error} title="Insights are unavailable" tone="error" />
         ) : null}
         {!isLoading && !isError ? (
           <MonthlyInsights
@@ -101,19 +102,20 @@ const DashboardPage = () => {
           <h3>Recent spending</h3>
         </div>
         {isLoading ? (
-          <div className="empty-panel">
-            <p>Loading dashboard summary...</p>
-          </div>
+          <EmptyState
+            description="Fetching recent transactions from the expense API."
+            title="Loading recent spending"
+            tone="loading"
+          />
         ) : null}
         {isError ? (
-          <div className="empty-panel error-panel">
-            <p>{error}</p>
-          </div>
+          <EmptyState description={error} title="Recent spending is unavailable" tone="error" />
         ) : null}
         {!isLoading && !isError && summary.recentExpenses.length === 0 ? (
-          <div className="empty-panel">
-            <p>No expense activity is available yet.</p>
-          </div>
+          <EmptyState
+            description="Add expenses from the Expenses page and the latest activity will appear here."
+            title="No recent spending"
+          />
         ) : null}
         {!isLoading && !isError && summary.recentExpenses.length > 0 ? (
           <div className="recent-list">
@@ -136,14 +138,10 @@ const DashboardPage = () => {
           <h3>Spending by category</h3>
         </div>
         {isLoading ? (
-          <div className="empty-panel">
-            <p>Loading category chart...</p>
-          </div>
+          <EmptyState description="Preparing category totals." title="Loading chart" tone="loading" />
         ) : null}
         {isError ? (
-          <div className="empty-panel error-panel">
-            <p>{error}</p>
-          </div>
+          <EmptyState description={error} title="Chart is unavailable" tone="error" />
         ) : null}
         {!isLoading && !isError ? <CategoryChart data={summary.categoryBreakdown} /> : null}
       </section>
@@ -154,14 +152,14 @@ const DashboardPage = () => {
           <h3>Monthly category limits</h3>
         </div>
         {isLoading ? (
-          <div className="empty-panel">
-            <p>Loading budget progress...</p>
-          </div>
+          <EmptyState
+            description="Comparing current-month spending with saved budgets."
+            title="Loading budget progress"
+            tone="loading"
+          />
         ) : null}
         {isError ? (
-          <div className="empty-panel error-panel">
-            <p>{error}</p>
-          </div>
+          <EmptyState description={error} title="Budget progress is unavailable" tone="error" />
         ) : null}
         {!isLoading && !isError ? (
           <BudgetTracker monthlyCategoryBreakdown={summary.monthlyCategoryBreakdown} />

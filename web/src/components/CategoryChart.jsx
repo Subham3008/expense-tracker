@@ -7,6 +7,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import EmptyState from './EmptyState.jsx';
 
 const currencyFormatter = new Intl.NumberFormat('en-IN', {
   currency: 'INR',
@@ -17,9 +18,10 @@ const currencyFormatter = new Intl.NumberFormat('en-IN', {
 const CategoryChart = ({ data }) => {
   if (data.length === 0) {
     return (
-      <div className="empty-panel">
-        <p>Category chart appears after expenses are added.</p>
-      </div>
+      <EmptyState
+        description="Add expenses in multiple categories to compare where money goes."
+        title="No chart data yet"
+      />
     );
   }
 

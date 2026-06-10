@@ -1,3 +1,5 @@
+import EmptyState from './EmptyState.jsx';
+
 const currencyFormatter = new Intl.NumberFormat('en-IN', {
   currency: 'INR',
   maximumFractionDigits: 2,
@@ -15,25 +17,34 @@ const formatDate = (date) => dateFormatter.format(new Date(date));
 const ExpenseTable = ({ error, expenses, isFiltered = false, onDelete, onEdit, status }) => {
   if (status === 'loading') {
     return (
-      <div className="empty-panel">
-        <p>Loading expenses...</p>
-      </div>
+      <EmptyState
+        description="Fetching the latest ledger from your API."
+        title="Loading expenses"
+        tone="loading"
+      />
     );
   }
 
   if (status === 'error') {
     return (
-      <div className="empty-panel error-panel">
-        <p>{error}</p>
-      </div>
+      <EmptyState
+        description={error}
+        title="Expense data could not be loaded"
+        tone="error"
+      />
     );
   }
 
   if (expenses.length === 0) {
     return (
-      <div className="empty-panel">
-        <p>{isFiltered ? 'No expenses match your filters.' : 'No expenses found. Add your first expense above.'}</p>
-      </div>
+      <EmptyState
+        description={
+          isFiltered
+            ? 'Try a different category or search term to widen the ledger.'
+            : 'Add your first expense above to start building the ledger.'
+        }
+        title={isFiltered ? 'No matching expenses' : 'No expenses yet'}
+      />
     );
   }
 

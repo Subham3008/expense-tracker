@@ -451,6 +451,63 @@ textarea {
   color: #0f513d;
 }
 
+.empty-state {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  min-height: 154px;
+  border: 1px dashed #c9d5ce;
+  border-radius: 8px;
+  background: #f8faf8;
+  padding: 22px;
+}
+
+.empty-state.error {
+  border-color: #e4b5b5;
+  background: #fff7f7;
+}
+
+.empty-state.loading {
+  background: #fbfdfa;
+}
+
+.empty-state-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 8px;
+  background: #e4eee8;
+  color: #126149;
+  font-weight: 900;
+}
+
+.empty-state.error .empty-state-icon {
+  background: #ffe0e0;
+  color: #a12d2d;
+}
+
+.empty-state strong {
+  display: block;
+  color: #101815;
+  font-size: 1rem;
+}
+
+.empty-state p {
+  margin: 4px 0 0;
+  color: #68766f;
+}
+
+.empty-state.error p {
+  color: #a12d2d;
+  font-weight: 700;
+}
+
+.empty-state-action {
+  grid-column: 2;
+}
+
 .empty-panel {
   display: grid;
   min-height: 154px;
@@ -785,5 +842,13 @@ textarea {
   .budget-input,
   .budget-input input {
     width: 100%;
+  }
+
+  .empty-state {
+    grid-template-columns: 1fr;
+  }
+
+  .empty-state-action {
+    grid-column: 1;
   }
 }
