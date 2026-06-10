@@ -67,19 +67,23 @@ const ExpenseTable = ({ error, expenses, isFiltered = false, onDelete, onEdit, s
         <tbody>
           {expenses.map((expense) => (
             <tr key={expense._id}>
-              <td>{formatDate(expense.date)}</td>
-              <td>
+              <td data-label="Date">{formatDate(expense.date)}</td>
+              <td data-label="Category">
                 <span className="category-pill">{expense.category}</span>
               </td>
-              <td>{expense.note || '-'}</td>
-              <td className="amount-cell">{currencyFormatter.format(expense.amount)}</td>
-              <td className="actions-cell">
-                <button className="text-button" onClick={() => onEdit(expense)} type="button">
-                  Edit
-                </button>
-                <button className="danger-button" onClick={() => onDelete(expense._id)} type="button">
-                  Delete
-                </button>
+              <td data-label="Note">{expense.note || '-'}</td>
+              <td className="amount-cell" data-label="Amount">
+                {currencyFormatter.format(expense.amount)}
+              </td>
+              <td className="actions-cell" data-label="Actions">
+                <div className="row-actions">
+                  <button className="text-button" onClick={() => onEdit(expense)} type="button">
+                    Edit
+                  </button>
+                  <button className="danger-button" onClick={() => onDelete(expense._id)} type="button">
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

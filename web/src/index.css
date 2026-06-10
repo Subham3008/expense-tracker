@@ -739,6 +739,12 @@ textarea {
   white-space: nowrap;
 }
 
+.row-actions {
+  display: inline-flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .category-pill {
   display: inline-flex;
   align-items: center;
@@ -782,7 +788,6 @@ textarea {
 }
 
 .danger-button {
-  margin-left: 8px;
   background: #fff0f0;
   color: #a12d2d;
 }
@@ -992,17 +997,54 @@ textarea {
     position: static;
     height: auto;
     gap: 18px;
-    padding: 18px;
+    padding: 16px;
     border-right: 0;
     border-bottom: 1px solid #d9e2dc;
+  }
+
+  :root[data-theme="dark"] .sidebar {
+    border-bottom-color: #27342e;
+  }
+
+  .brand {
+    grid-template-columns: 44px minmax(0, 1fr);
+  }
+
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
   }
 
   .sidebar-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .theme-toggle {
+    margin-top: 0;
+  }
+
   .content-shell {
-    padding: 22px 18px;
+    padding: 20px 16px 28px;
+  }
+
+  .page {
+    gap: 18px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page h2 {
+    font-size: 2rem;
+  }
+
+  .panel {
+    gap: 18px;
+    min-height: auto;
+    padding: 18px;
   }
 
   .summary-grid {
@@ -1044,6 +1086,17 @@ textarea {
   .search-field {
     width: 100%;
   }
+
+  .filter-row {
+    flex-wrap: nowrap;
+    margin-inline: -2px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .filter-chip {
+    flex: 0 0 auto;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1062,6 +1115,10 @@ textarea {
 
   .nav-link {
     min-height: 42px;
+  }
+
+  .theme-toggle {
+    width: 100%;
   }
 
   .summary-grid {
@@ -1094,5 +1151,95 @@ textarea {
 
   .empty-state-action {
     grid-column: 1;
+  }
+
+  .table-wrap {
+    overflow: visible;
+    border: 0;
+  }
+
+  .expense-table {
+    display: block;
+    min-width: 0;
+    background: transparent;
+  }
+
+  .expense-table thead {
+    display: none;
+  }
+
+  .expense-table tbody,
+  .expense-table tr,
+  .expense-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .expense-table tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .expense-table tr {
+    border: 1px solid #dbe4de;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 10px 12px;
+  }
+
+  :root[data-theme="dark"] .expense-table tr {
+    border-color: #27342e;
+    background: #101713;
+  }
+
+  .expense-table td {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    border-bottom: 1px solid #e6eee9;
+    padding: 10px 0;
+    text-align: right;
+  }
+
+  :root[data-theme="dark"] .expense-table td {
+    border-color: #25322c;
+  }
+
+  .expense-table td::before {
+    content: attr(data-label);
+    color: #68766f;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  :root[data-theme="dark"] .expense-table td::before {
+    color: #9caea4;
+  }
+
+  .expense-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .amount-cell,
+  .actions-cell {
+    width: auto;
+    text-align: right;
+  }
+
+  .actions-cell {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+  }
+
+  .row-actions {
+    justify-self: end;
+  }
+
+  .actions-cell .text-button,
+  .actions-cell .danger-button {
+    min-width: 86px;
   }
 }
