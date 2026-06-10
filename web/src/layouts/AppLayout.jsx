@@ -1,4 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
+import { useThemeMode } from '../hooks/useThemeMode.js';
 
 const navigationItems = [
   { label: 'Dashboard', to: '/', marker: 'D' },
@@ -6,6 +7,8 @@ const navigationItems = [
 ];
 
 const AppLayout = () => {
+  const { isDarkMode, toggleTheme } = useThemeMode();
+
   return (
     <div className="app-shell">
       <aside className="sidebar" aria-label="Primary navigation">
@@ -34,6 +37,18 @@ const AppLayout = () => {
             </NavLink>
           ))}
         </nav>
+
+        <button
+          aria-pressed={isDarkMode}
+          className="theme-toggle"
+          onClick={toggleTheme}
+          type="button"
+        >
+          <span className="theme-toggle-track" aria-hidden="true">
+            <span className="theme-toggle-thumb" />
+          </span>
+          <span>{isDarkMode ? 'Dark mode' : 'Light mode'}</span>
+        </button>
       </aside>
 
       <main className="content-shell">
