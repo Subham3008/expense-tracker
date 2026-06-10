@@ -159,7 +159,7 @@ textarea {
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -198,6 +198,47 @@ textarea {
 
 .metric-card span {
   font-size: 0.9rem;
+}
+
+.recent-list {
+  display: grid;
+  gap: 10px;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 68px;
+  border: 1px solid #e2ebe6;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 14px 16px;
+}
+
+.recent-item div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.recent-item strong {
+  color: #101815;
+}
+
+.recent-item span {
+  overflow: hidden;
+  color: #68766f;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recent-item p {
+  margin: 0;
+  color: #101815;
+  font-weight: 900;
+  white-space: nowrap;
 }
 
 .panel {
@@ -471,7 +512,7 @@ textarea {
   }
 
   .summary-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .form-grid {
@@ -509,5 +550,14 @@ textarea {
 
   .nav-link {
     min-height: 42px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-item {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
