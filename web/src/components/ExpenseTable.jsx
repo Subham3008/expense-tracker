@@ -12,7 +12,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-IN', {
 
 const formatDate = (date) => dateFormatter.format(new Date(date));
 
-const ExpenseTable = ({ error, expenses, onDelete, onEdit, status }) => {
+const ExpenseTable = ({ error, expenses, isFiltered = false, onDelete, onEdit, status }) => {
   if (status === 'loading') {
     return (
       <div className="empty-panel">
@@ -32,7 +32,7 @@ const ExpenseTable = ({ error, expenses, onDelete, onEdit, status }) => {
   if (expenses.length === 0) {
     return (
       <div className="empty-panel">
-        <p>No expenses found. Add your first expense above.</p>
+        <p>{isFiltered ? 'No expenses match your search.' : 'No expenses found. Add your first expense above.'}</p>
       </div>
     );
   }

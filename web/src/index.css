@@ -391,6 +391,41 @@ textarea {
   font-size: 1.25rem;
 }
 
+.panel-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.search-field {
+  display: grid;
+  gap: 6px;
+  width: min(320px, 100%);
+}
+
+.search-field span {
+  color: #68766f;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.search-field input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #c9d5ce;
+  border-radius: 8px;
+  color: #101815;
+  outline: none;
+  padding: 9px 12px;
+}
+
+.search-field input:focus {
+  border-color: #126149;
+  box-shadow: 0 0 0 3px rgba(18, 97, 73, 0.14);
+}
+
 .empty-panel {
   display: grid;
   min-height: 154px;
@@ -673,6 +708,15 @@ textarea {
   .primary-button,
   .secondary-button {
     flex: 1;
+  }
+
+  .panel-heading-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search-field {
+    width: 100%;
   }
 }
 

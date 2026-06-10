@@ -1,11 +1,42 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import ExpenseForm from '../components/ExpenseForm.jsx';
 import ExpenseTable from '../components/ExpenseTable.jsx';
 import { useExpenses } from '../hooks/useExpenses.js';
 
+const dateFormatter = new Intl.DateTimeFormat('en-IN', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+});
+
+const matchesSearch = (expense, searchTerm) => {
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+
+  if (!normalizedSearch) {
+    return true;
+  }
+
+  const searchableText = [
+    expense.category,
+    expense.note,
+    String(expense.amount),
+    dateFormatter.format(new Date(expense.date)),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+
+  return searchableText.includes(normalizedSearch);
+};
+
 const ExpensesPage = () => {
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const { error, expenses, removeExpense, status, upsertExpense } = useExpenses();
+
+  const filteredExpenses = useMemo(() => {
+    return expenses.filter((expense) => matchesSearch(expense, searchTerm));
+  }, [expenses, searchTerm]);
 
   const handleSavedExpense = (expense) => {
     upsertExpense(expense);
@@ -42,13 +73,25 @@ const ExpensesPage = () => {
       </section>
 
       <section className="panel">
-        <div>
-          <p className="section-kicker">Ledger</p>
-          <h3>Expense list</h3>
+        <div className="panel-heading-row">
+          <div>
+            <p className="section-kicker">Ledger</p>
+            <h3>Expense list</h3>
+          </div>
+          <label className="search-field">
+            <span>Search expenses</span>
+            <input
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Search note, category, amount"
+              type="search"
+              value={searchTerm}
+            />
+          </label>
         </div>
         <ExpenseTable
           error={error}
-          expenses={expenses}
+          expenses={filteredExpenses}
+          isFiltered={Boolean(searchTerm.trim())}
           onDelete={handleDeleteExpense}
           onEdit={setSelectedExpense}
           status={status}
