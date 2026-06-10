@@ -32,6 +32,18 @@ const getTopCategory = (expenses) => {
   return category ? { amount, category } : null;
 };
 
+const getCategoryBreakdown = (expenses) => {
+  const categoryTotals = expenses.reduce((totals, expense) => {
+    totals[expense.category] = (totals[expense.category] ?? 0) + expense.amount;
+
+    return totals;
+  }, {});
+
+  return Object.entries(categoryTotals)
+    .map(([category, amount]) => ({ amount, category }))
+    .sort((firstCategory, secondCategory) => secondCategory.amount - firstCategory.amount);
+};
+
 export const useDashboardSummary = () => {
   const [expenses, setExpenses] = useState([]);
   const [status, setStatus] = useState('idle');
@@ -64,6 +76,7 @@ export const useDashboardSummary = () => {
       .reduce((total, expense) => total + expense.amount, 0);
 
     return {
+      categoryBreakdown: getCategoryBreakdown(expenses),
       monthlySpent,
       recentExpenses: expenses.slice(0, 4),
       topCategory: getTopCategory(expenses),

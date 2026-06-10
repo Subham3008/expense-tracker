@@ -241,6 +241,15 @@ textarea {
   white-space: nowrap;
 }
 
+.chart-frame {
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid #e2ebe6;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 12px;
+}
+
 .panel {
   display: grid;
   gap: 22px;

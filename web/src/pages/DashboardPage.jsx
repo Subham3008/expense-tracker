@@ -1,3 +1,4 @@
+import CategoryChart from '../components/CategoryChart.jsx';
 import { useDashboardSummary } from '../hooks/useDashboardSummary.js';
 
 const currencyFormatter = new Intl.NumberFormat('en-IN', {
@@ -101,6 +102,24 @@ const DashboardPage = () => {
             ))}
           </div>
         ) : null}
+      </section>
+
+      <section className="panel">
+        <div>
+          <p className="section-kicker">Categories</p>
+          <h3>Spending by category</h3>
+        </div>
+        {isLoading ? (
+          <div className="empty-panel">
+            <p>Loading category chart...</p>
+          </div>
+        ) : null}
+        {isError ? (
+          <div className="empty-panel error-panel">
+            <p>{error}</p>
+          </div>
+        ) : null}
+        {!isLoading && !isError ? <CategoryChart data={summary.categoryBreakdown} /> : null}
       </section>
     </section>
   );
