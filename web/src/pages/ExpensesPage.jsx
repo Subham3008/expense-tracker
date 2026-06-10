@@ -3,6 +3,7 @@ import ExpenseForm from '../components/ExpenseForm.jsx';
 import ExpenseTable from '../components/ExpenseTable.jsx';
 import { EXPENSE_CATEGORIES } from '../hooks/useExpenseForm.js';
 import { useExpenses } from '../hooks/useExpenses.js';
+import { exportExpensesCsv } from '../utils/exportExpensesCsv.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -86,15 +87,25 @@ const ExpensesPage = () => {
             <p className="section-kicker">Ledger</p>
             <h3>Expense list</h3>
           </div>
-          <label className="search-field">
-            <span>Search expenses</span>
-            <input
-              onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder="Search note, category, amount"
-              type="search"
-              value={searchTerm}
-            />
-          </label>
+          <div className="ledger-actions">
+            <label className="search-field">
+              <span>Search expenses</span>
+              <input
+                onChange={(event) => setSearchTerm(event.target.value)}
+                placeholder="Search note, category, amount"
+                type="search"
+                value={searchTerm}
+              />
+            </label>
+            <button
+              className="secondary-button"
+              disabled={filteredExpenses.length === 0}
+              onClick={() => exportExpensesCsv(filteredExpenses)}
+              type="button"
+            >
+              Export CSV
+            </button>
+          </div>
         </div>
         <div className="filter-row" aria-label="Filter by category">
           {['All', ...EXPENSE_CATEGORIES].map((category) => (

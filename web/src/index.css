@@ -398,6 +398,12 @@ textarea {
   gap: 16px;
 }
 
+.ledger-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
 .search-field {
   display: grid;
   gap: 6px;
@@ -744,6 +750,11 @@ textarea {
   background: #f4f7f5;
 }
 
+.secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 @media (max-width: 860px) {
   .app-shell {
     grid-template-columns: 1fr;
@@ -793,6 +804,11 @@ textarea {
   }
 
   .panel-heading-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ledger-actions {
     align-items: stretch;
     flex-direction: column;
   }
