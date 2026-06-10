@@ -1,5 +1,6 @@
 import BudgetTracker from '../components/BudgetTracker.jsx';
 import CategoryChart from '../components/CategoryChart.jsx';
+import MonthlyInsights from '../components/MonthlyInsights.jsx';
 import { useDashboardSummary } from '../hooks/useDashboardSummary.js';
 
 const currencyFormatter = new Intl.NumberFormat('en-IN', {
@@ -69,6 +70,30 @@ const DashboardPage = () => {
           </article>
         ))}
       </div>
+
+      <section className="panel">
+        <div>
+          <p className="section-kicker">Insights</p>
+          <h3>Monthly spending signals</h3>
+        </div>
+        {isLoading ? (
+          <div className="empty-panel">
+            <p>Loading monthly insights...</p>
+          </div>
+        ) : null}
+        {isError ? (
+          <div className="empty-panel error-panel">
+            <p>{error}</p>
+          </div>
+        ) : null}
+        {!isLoading && !isError ? (
+          <MonthlyInsights
+            averageDailySpend={summary.averageDailySpend}
+            insights={summary.insights}
+            monthlySpent={summary.monthlySpent}
+          />
+        ) : null}
+      </section>
 
       <section className="panel">
         <div>

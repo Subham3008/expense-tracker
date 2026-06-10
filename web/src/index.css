@@ -200,6 +200,46 @@ textarea {
   font-size: 0.9rem;
 }
 
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.insight-card {
+  display: grid;
+  gap: 8px;
+  min-height: 132px;
+  border: 1px solid #e2ebe6;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 16px;
+}
+
+.insight-card.good {
+  border-color: #bdd8c9;
+  background: #f5fbf7;
+}
+
+.insight-card.warning {
+  border-color: #e4d2aa;
+  background: #fffaf0;
+}
+
+.insight-card p,
+.insight-card span {
+  margin: 0;
+  color: #68766f;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.insight-card strong {
+  color: #101815;
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
 .recent-list {
   display: grid;
   gap: 10px;
@@ -613,6 +653,10 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .insights-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -651,6 +695,10 @@ textarea {
   }
 
   .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insights-grid {
     grid-template-columns: 1fr;
   }
 
