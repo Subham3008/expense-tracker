@@ -66,6 +66,7 @@ const ExpensesPage = () => {
         <div>
           <p className="section-kicker">Records</p>
           <h2>Expenses</h2>
+          <span className="page-subtitle">Capture, review, filter, and export your expense ledger.</span>
         </div>
       </header>
 

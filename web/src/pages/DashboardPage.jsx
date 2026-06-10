@@ -59,6 +59,7 @@ const DashboardPage = () => {
         <div>
           <p className="section-kicker">Overview</p>
           <h2>Dashboard</h2>
+          <span className="page-subtitle">Current spending health, budgets, and category movement.</span>
         </div>
       </header>
 

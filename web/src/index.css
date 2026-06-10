@@ -20,6 +20,10 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background: rgba(18, 97, 73, 0.2);
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -43,6 +47,28 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+button,
+input,
+select,
+textarea,
+a {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(18, 97, 73, 0.22);
+  outline-offset: 3px;
 }
 
 .app-shell {
@@ -141,6 +167,7 @@ textarea {
 
 :root[data-theme="dark"] .brand-eyebrow,
 :root[data-theme="dark"] .section-kicker,
+:root[data-theme="dark"] .page-subtitle,
 :root[data-theme="dark"] .metric-card p,
 :root[data-theme="dark"] .metric-card span,
 :root[data-theme="dark"] .insight-card p,
@@ -209,6 +236,14 @@ textarea {
   font-size: clamp(2rem, 4vw, 3rem);
 }
 
+.page-subtitle {
+  display: block;
+  max-width: 640px;
+  margin-top: 8px;
+  color: #68766f;
+  font-weight: 650;
+}
+
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -235,6 +270,13 @@ textarea {
   gap: 8px;
   min-height: 142px;
   padding: 20px;
+}
+
+.metric-card:hover,
+.insight-card:hover,
+.recent-item:hover,
+.budget-row:hover {
+  transform: translateY(-1px);
 }
 
 .metric-card p,
@@ -478,6 +520,10 @@ textarea {
   padding: 22px;
 }
 
+.panel > div:first-child {
+  min-width: 0;
+}
+
 .panel h3 {
   margin-top: 4px;
   font-size: 1.25rem;
@@ -717,6 +763,14 @@ textarea {
   font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
+}
+
+.expense-table tbody tr:hover {
+  background: #fbfdfa;
+}
+
+:root[data-theme="dark"] .expense-table tbody tr:hover {
+  background: #141c18;
 }
 
 :root[data-theme="dark"] .expense-table th {
@@ -966,6 +1020,7 @@ textarea {
 
 .primary-button:hover {
   background: #0d4d39;
+  transform: translateY(-1px);
 }
 
 .primary-button:disabled {
@@ -981,6 +1036,7 @@ textarea {
 
 .secondary-button:hover {
   background: #f4f7f5;
+  transform: translateY(-1px);
 }
 
 .secondary-button:disabled {
