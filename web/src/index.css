@@ -250,6 +250,95 @@ textarea {
   padding: 12px;
 }
 
+.budget-list {
+  display: grid;
+  gap: 12px;
+}
+
+.budget-row {
+  display: grid;
+  gap: 12px;
+  border: 1px solid #e2ebe6;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 16px;
+}
+
+.budget-row-header,
+.budget-row-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.budget-row-header div {
+  display: grid;
+  gap: 4px;
+}
+
+.budget-row strong {
+  color: #101815;
+}
+
+.budget-row span {
+  color: #68766f;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.budget-input {
+  display: grid;
+  gap: 6px;
+  min-width: 150px;
+}
+
+.budget-input span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.budget-input input {
+  width: 150px;
+  min-height: 40px;
+  border: 1px solid #c9d5ce;
+  border-radius: 8px;
+  color: #101815;
+  outline: none;
+  padding: 8px 10px;
+}
+
+.budget-input input:focus {
+  border-color: #126149;
+  box-shadow: 0 0 0 3px rgba(18, 97, 73, 0.14);
+}
+
+.budget-meter {
+  position: relative;
+  overflow: hidden;
+  height: 12px;
+  border-radius: 999px;
+  background: #edf3ef;
+}
+
+.budget-meter-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+}
+
+.budget-meter-fill.good {
+  background: #126149;
+}
+
+.budget-meter-fill.warning {
+  background: #b7791f;
+}
+
+.budget-meter-fill.over {
+  background: #bd3737;
+}
+
 .panel {
   display: grid;
   gap: 22px;
@@ -568,5 +657,16 @@ textarea {
   .recent-item {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .budget-row-header,
+  .budget-row-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .budget-input,
+  .budget-input input {
+    width: 100%;
   }
 }

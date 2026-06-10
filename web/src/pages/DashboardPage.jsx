@@ -1,3 +1,4 @@
+import BudgetTracker from '../components/BudgetTracker.jsx';
 import CategoryChart from '../components/CategoryChart.jsx';
 import { useDashboardSummary } from '../hooks/useDashboardSummary.js';
 
@@ -120,6 +121,26 @@ const DashboardPage = () => {
           </div>
         ) : null}
         {!isLoading && !isError ? <CategoryChart data={summary.categoryBreakdown} /> : null}
+      </section>
+
+      <section className="panel">
+        <div>
+          <p className="section-kicker">Budgets</p>
+          <h3>Monthly category limits</h3>
+        </div>
+        {isLoading ? (
+          <div className="empty-panel">
+            <p>Loading budget progress...</p>
+          </div>
+        ) : null}
+        {isError ? (
+          <div className="empty-panel error-panel">
+            <p>{error}</p>
+          </div>
+        ) : null}
+        {!isLoading && !isError ? (
+          <BudgetTracker monthlyCategoryBreakdown={summary.monthlyCategoryBreakdown} />
+        ) : null}
       </section>
     </section>
   );

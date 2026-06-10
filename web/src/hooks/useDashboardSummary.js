@@ -74,9 +74,11 @@ export const useDashboardSummary = () => {
     const monthlySpent = expenses
       .filter((expense) => getMonthKey(expense.date) === monthKey)
       .reduce((total, expense) => total + expense.amount, 0);
+    const monthlyExpenses = expenses.filter((expense) => getMonthKey(expense.date) === monthKey);
 
     return {
       categoryBreakdown: getCategoryBreakdown(expenses),
+      monthlyCategoryBreakdown: getCategoryBreakdown(monthlyExpenses),
       monthlySpent,
       recentExpenses: expenses.slice(0, 4),
       topCategory: getTopCategory(expenses),
