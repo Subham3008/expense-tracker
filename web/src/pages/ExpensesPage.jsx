@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import ExpenseForm from '../components/ExpenseForm.jsx';
 import ExpenseTable from '../components/ExpenseTable.jsx';
+import { EXPENSE_CATEGORIES } from '../hooks/useExpenseForm.js';
 import { useExpenses } from '../hooks/useExpenses.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
@@ -29,14 +30,21 @@ const matchesSearch = (expense, searchTerm) => {
   return searchableText.includes(normalizedSearch);
 };
 
+const matchesCategory = (expense, categoryFilter) => {
+  return categoryFilter === 'All' || expense.category === categoryFilter;
+};
+
 const ExpensesPage = () => {
   const [selectedExpense, setSelectedExpense] = useState(null);
+  const [categoryFilter, setCategoryFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const { error, expenses, removeExpense, status, upsertExpense } = useExpenses();
 
   const filteredExpenses = useMemo(() => {
-    return expenses.filter((expense) => matchesSearch(expense, searchTerm));
-  }, [expenses, searchTerm]);
+    return expenses.filter((expense) => {
+      return matchesCategory(expense, categoryFilter) && matchesSearch(expense, searchTerm);
+    });
+  }, [categoryFilter, expenses, searchTerm]);
 
   const handleSavedExpense = (expense) => {
     upsertExpense(expense);
@@ -88,10 +96,22 @@ const ExpensesPage = () => {
             />
           </label>
         </div>
+        <div className="filter-row" aria-label="Filter by category">
+          {['All', ...EXPENSE_CATEGORIES].map((category) => (
+            <button
+              className={categoryFilter === category ? 'filter-chip active' : 'filter-chip'}
+              key={category}
+              onClick={() => setCategoryFilter(category)}
+              type="button"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
         <ExpenseTable
           error={error}
           expenses={filteredExpenses}
-          isFiltered={Boolean(searchTerm.trim())}
+          isFiltered={Boolean(searchTerm.trim()) || categoryFilter !== 'All'}
           onDelete={handleDeleteExpense}
           onEdit={setSelectedExpense}
           status={status}

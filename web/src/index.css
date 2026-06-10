@@ -426,6 +426,31 @@ textarea {
   box-shadow: 0 0 0 3px rgba(18, 97, 73, 0.14);
 }
 
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-chip {
+  min-height: 36px;
+  border: 1px solid #c9d5ce;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #304039;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 7px 12px;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+  border-color: #126149;
+  background: #e4eee8;
+  color: #0f513d;
+}
+
 .empty-panel {
   display: grid;
   min-height: 154px;

@@ -32,7 +32,7 @@ const ExpenseTable = ({ error, expenses, isFiltered = false, onDelete, onEdit, s
   if (expenses.length === 0) {
     return (
       <div className="empty-panel">
-        <p>{isFiltered ? 'No expenses match your search.' : 'No expenses found. Add your first expense above.'}</p>
+        <p>{isFiltered ? 'No expenses match your filters.' : 'No expenses found. Add your first expense above.'}</p>
       </div>
     );
   }
