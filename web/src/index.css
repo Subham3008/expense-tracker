@@ -297,6 +297,15 @@ a:focus-visible {
   line-height: 1;
 }
 
+.money-value {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
 :root[data-theme="dark"] .metric-card strong,
 :root[data-theme="dark"] .insight-card strong,
 :root[data-theme="dark"] .recent-item strong,
@@ -408,6 +417,7 @@ a:focus-visible {
   margin: 0;
   color: #101815;
   font-weight: 900;
+  max-width: 42%;
   white-space: nowrap;
 }
 
@@ -449,6 +459,7 @@ a:focus-visible {
 .budget-row-header div {
   display: grid;
   gap: 4px;
+  min-width: 0;
 }
 
 .budget-row strong {
@@ -459,6 +470,7 @@ a:focus-visible {
   color: #68766f;
   font-size: 0.9rem;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .budget-input {
@@ -749,6 +761,7 @@ a:focus-visible {
   color: #304039;
   text-align: left;
   vertical-align: middle;
+  min-width: 0;
 }
 
 :root[data-theme="dark"] .expense-table th,
@@ -783,6 +796,7 @@ a:focus-visible {
 }
 
 .amount-cell {
+  max-width: 150px;
   text-align: right;
   white-space: nowrap;
 }
