@@ -1,4 +1,5 @@
 import { formatCurrency, formatFullCurrency } from '../utils/formatCurrency.js';
+import { cx } from '../utils/uiClasses.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -49,14 +50,29 @@ const MonthlyInsights = ({ averageDailySpend, insights, monthlySpent }) => {
   ];
 
   return (
-    <div className="insights-grid">
+    <div className="grid gap-3 sm:grid-cols-2">
       {insightCards.map((card) => (
-        <article className={`insight-card ${card.tone}`} key={card.label}>
-          <p>{card.label}</p>
-          <strong className="money-value" title={card.title}>
+        <article
+          className={cx(
+            'grid min-h-36 min-w-0 content-start gap-2.5 rounded-lg border p-4 hover:-translate-y-0.5 dark:hover:border-emerald-400/30',
+            card.tone === 'good'
+              ? 'border-emerald-200 bg-emerald-50 dark:border-emerald-400/30 dark:bg-emerald-400/10'
+              : card.tone === 'warning'
+                ? 'border-amber-200 bg-amber-50 dark:border-amber-300/30 dark:bg-amber-300/10'
+                : 'border-slate-200 bg-slate-50 dark:border-slate-500/20 dark:bg-white/[0.035]',
+          )}
+          key={card.label}
+        >
+          <p className="m-0 text-sm font-bold text-slate-500 dark:text-slate-400">{card.label}</p>
+          <strong
+            className="block break-words font-display text-2xl font-black leading-tight text-slate-950 sm:text-[clamp(1.35rem,1.1rem+0.65vw,1.8rem)] dark:text-slate-50"
+            title={card.title}
+          >
             {card.value}
           </strong>
-          <span>{card.detail}</span>
+          <span className="max-w-60 text-sm font-bold leading-6 text-slate-500 dark:text-slate-400">
+            {card.detail}
+          </span>
         </article>
       ))}
     </div>
