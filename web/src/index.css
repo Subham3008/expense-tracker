@@ -2221,6 +2221,43 @@ textarea {
   line-height: 1.55;
 }
 
+.insights-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.insight-card {
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.insight-card .money-value {
+  display: block;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.insight-card strong {
+  font-size: clamp(1.35rem, 1.1rem + 0.65vw, 1.8rem);
+  line-height: 1.12;
+}
+
+.insight-card span {
+  max-width: 24ch;
+}
+
+@media (max-width: 560px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insight-card span {
+    max-width: none;
+  }
+}
+
 .nav-link,
 .primary-button,
 .secondary-button,
