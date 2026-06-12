@@ -14,7 +14,7 @@ const AppLayout = () => {
       <aside className="sidebar" aria-label="Primary navigation">
         <div className="brand">
           <div className="brand-mark" aria-hidden="true">
-            Rs
+            ET
           </div>
           <div>
             <p className="brand-eyebrow">Personal Finance</p>

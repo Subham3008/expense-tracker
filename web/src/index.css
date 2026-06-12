@@ -1,10 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap");
 @import "tailwindcss";
 
 :root {
   color: #17201c;
   background: #f4f7f5;
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Manrope, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   font-synthesis: none;
   line-height: 1.5;
@@ -2179,4 +2180,52 @@ body {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Typography and logo refresh */
+body,
+button,
+input,
+select,
+textarea {
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.brand h1,
+.page h2,
+.panel h3,
+.metric-card strong,
+.insight-card strong,
+.empty-state strong {
+  font-family: "Plus Jakarta Sans", Manrope, ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+.brand-mark {
+  font-family: "Plus Jakarta Sans", Manrope, ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.page h2 {
+  letter-spacing: 0;
+}
+
+.page-subtitle,
+.metric-card span,
+.insight-card span,
+.recent-item span,
+.budget-row span,
+.empty-state p {
+  line-height: 1.55;
+}
+
+.nav-link,
+.primary-button,
+.secondary-button,
+.text-button,
+.danger-button,
+.filter-chip {
+  letter-spacing: 0;
 }
