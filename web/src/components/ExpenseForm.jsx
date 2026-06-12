@@ -61,15 +61,32 @@ const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
 
         <label className={formClasses.field}>
           <span className={formClasses.label}>Date</span>
-          <input
-            aria-invalid={Boolean(errors.date)}
-            className={formClasses.input}
-            max={maxDate}
-            name="date"
-            onChange={handleChange}
-            type="date"
-            value={values.date}
-          />
+          <span className="relative block">
+            <input
+              aria-invalid={Boolean(errors.date)}
+              className={`${formClasses.input} pr-11`}
+              max={maxDate}
+              name="date"
+              onChange={handleChange}
+              type="date"
+              value={values.date}
+            />
+            <svg
+              aria-hidden="true"
+              className="pointer-events-none absolute right-3 top-1/2 size-5 -translate-y-1/2 text-slate-500 dark:text-zinc-200"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 2v4" />
+              <path d="M16 2v4" />
+              <path d="M3 10h18" />
+              <rect height="18" rx="2" width="18" x="3" y="4" />
+            </svg>
+          </span>
           {errors.date ? <small className={formClasses.errorText}>{errors.date}</small> : null}
         </label>
 
