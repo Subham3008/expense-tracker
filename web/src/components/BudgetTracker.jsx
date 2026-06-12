@@ -1,10 +1,5 @@
 import { useCategoryBudgets } from '../hooks/useCategoryBudgets.js';
-
-const currencyFormatter = new Intl.NumberFormat('en-IN', {
-  currency: 'INR',
-  maximumFractionDigits: 0,
-  style: 'currency',
-});
+import { formatCurrency, formatFullCurrency } from '../utils/formatCurrency.js';
 
 const BudgetTracker = ({ monthlyCategoryBreakdown }) => {
   const { budgetRows, updateBudget } = useCategoryBudgets(monthlyCategoryBreakdown);
@@ -16,8 +11,9 @@ const BudgetTracker = ({ monthlyCategoryBreakdown }) => {
           <div className="budget-row-header">
             <div>
               <strong>{row.category}</strong>
-              <span>
-                {currencyFormatter.format(row.spent)} spent of {currencyFormatter.format(row.budget)}
+              <span title={`${formatFullCurrency(row.spent)} spent of ${formatFullCurrency(row.budget)}`}>
+                {formatCurrency(row.spent, { compact: true, maximumFractionDigits: 0 })} spent of{' '}
+                {formatCurrency(row.budget, { compact: true, maximumFractionDigits: 0 })}
               </span>
             </div>
             <label className="budget-input">
@@ -43,8 +39,8 @@ const BudgetTracker = ({ monthlyCategoryBreakdown }) => {
             <span>{Math.round(row.percentage)}% used</span>
             <span>
               {row.status === 'over'
-                ? `${currencyFormatter.format(row.spent - row.budget)} over`
-                : `${currencyFormatter.format(row.remaining)} left`}
+                ? `${formatCurrency(row.spent - row.budget, { compact: true, maximumFractionDigits: 0 })} over`
+                : `${formatCurrency(row.remaining, { compact: true, maximumFractionDigits: 0 })} left`}
             </span>
           </div>
         </article>

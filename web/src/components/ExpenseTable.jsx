@@ -1,10 +1,5 @@
 import EmptyState from './EmptyState.jsx';
-
-const currencyFormatter = new Intl.NumberFormat('en-IN', {
-  currency: 'INR',
-  maximumFractionDigits: 2,
-  style: 'currency',
-});
+import { formatCurrency, formatFullCurrency } from '../utils/formatCurrency.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -73,7 +68,9 @@ const ExpenseTable = ({ error, expenses, isFiltered = false, onDelete, onEdit, s
               </td>
               <td data-label="Note">{expense.note || '-'}</td>
               <td className="amount-cell" data-label="Amount">
-                {currencyFormatter.format(expense.amount)}
+                <span className="money-value" title={formatFullCurrency(expense.amount)}>
+                  {formatCurrency(expense.amount, { compact: true })}
+                </span>
               </td>
               <td className="actions-cell" data-label="Actions">
                 <div className="row-actions">

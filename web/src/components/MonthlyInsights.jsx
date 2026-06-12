@@ -1,8 +1,4 @@
-const currencyFormatter = new Intl.NumberFormat('en-IN', {
-  currency: 'INR',
-  maximumFractionDigits: 0,
-  style: 'currency',
-});
+import { formatCurrency, formatFullCurrency } from '../utils/formatCurrency.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -23,28 +19,32 @@ const MonthlyInsights = ({ averageDailySpend, insights, monthlySpent }) => {
         ? `${formatPercent(monthChange)} ${changeDirection} than last month`
         : 'Add previous-month expenses for comparison',
       label: 'Month Trend',
+      title: hasPreviousMonth ? formatFullCurrency(monthlySpent) : undefined,
       tone: hasPreviousMonth && monthChange > 0 ? 'warning' : 'good',
-      value: hasPreviousMonth ? currencyFormatter.format(monthlySpent) : 'No baseline',
+      value: hasPreviousMonth ? formatCurrency(monthlySpent, { compact: true, maximumFractionDigits: 0 }) : 'No baseline',
     },
     {
       detail: 'Based on spending so far this month',
       label: 'Projected Spend',
+      title: formatFullCurrency(insights.projectedMonthlySpend),
       tone: 'neutral',
-      value: currencyFormatter.format(insights.projectedMonthlySpend),
+      value: formatCurrency(insights.projectedMonthlySpend, { compact: true, maximumFractionDigits: 0 }),
     },
     {
       detail: 'Average per elapsed day',
       label: 'Daily Pace',
+      title: formatFullCurrency(averageDailySpend),
       tone: 'neutral',
-      value: currencyFormatter.format(averageDailySpend),
+      value: formatCurrency(averageDailySpend, { compact: true, maximumFractionDigits: 0 }),
     },
     {
       detail: busiestDay
         ? `${dateFormatter.format(new Date(busiestDay.date))} had the highest spend`
         : 'Appears after current-month expenses',
       label: 'Busiest Day',
+      title: busiestDay ? formatFullCurrency(busiestDay.amount) : undefined,
       tone: 'neutral',
-      value: busiestDay ? currencyFormatter.format(busiestDay.amount) : '-',
+      value: busiestDay ? formatCurrency(busiestDay.amount, { compact: true, maximumFractionDigits: 0 }) : '-',
     },
   ];
 
@@ -53,7 +53,9 @@ const MonthlyInsights = ({ averageDailySpend, insights, monthlySpent }) => {
       {insightCards.map((card) => (
         <article className={`insight-card ${card.tone}`} key={card.label}>
           <p>{card.label}</p>
-          <strong>{card.value}</strong>
+          <strong className="money-value" title={card.title}>
+            {card.value}
+          </strong>
           <span>{card.detail}</span>
         </article>
       ))}

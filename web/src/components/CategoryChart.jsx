@@ -8,12 +8,7 @@ import {
   YAxis,
 } from 'recharts';
 import EmptyState from './EmptyState.jsx';
-
-const currencyFormatter = new Intl.NumberFormat('en-IN', {
-  currency: 'INR',
-  maximumFractionDigits: 0,
-  style: 'currency',
-});
+import { formatCurrency } from '../utils/formatCurrency.js';
 
 const CategoryChart = ({ data }) => {
   if (data.length === 0) {
@@ -39,13 +34,16 @@ const CategoryChart = ({ data }) => {
           <YAxis
             axisLine={false}
             tick={{ fill: '#68766f', fontSize: 12, fontWeight: 700 }}
-            tickFormatter={(value) => currencyFormatter.format(value)}
+            tickFormatter={(value) => formatCurrency(value, { compact: true, maximumFractionDigits: 0 })}
             tickLine={false}
             width={72}
           />
           <Tooltip
             cursor={{ fill: '#eef5f1' }}
-            formatter={(value) => [currencyFormatter.format(value), 'Spent']}
+            formatter={(value) => [
+              formatCurrency(value, { compact: true, maximumFractionDigits: 0 }),
+              'Spent',
+            ]}
             labelStyle={{ color: '#101815', fontWeight: 800 }}
           />
           <Bar dataKey="amount" fill="#126149" radius={[6, 6, 0, 0]} />

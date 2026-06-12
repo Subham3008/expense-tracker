@@ -1,14 +1,10 @@
+import { Link } from 'react-router-dom';
 import BudgetTracker from '../components/BudgetTracker.jsx';
 import CategoryChart from '../components/CategoryChart.jsx';
 import EmptyState from '../components/EmptyState.jsx';
 import MonthlyInsights from '../components/MonthlyInsights.jsx';
 import { useDashboardSummary } from '../hooks/useDashboardSummary.js';
-
-const currencyFormatter = new Intl.NumberFormat('en-IN', {
-  currency: 'INR',
-  maximumFractionDigits: 2,
-  style: 'currency',
-});
+import { formatCurrency, formatFullCurrency } from '../utils/formatCurrency.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -21,8 +17,6 @@ const monthLabel = new Intl.DateTimeFormat('en-IN', {
   year: 'numeric',
 }).format(new Date());
 
-const formatCurrency = (value) => currencyFormatter.format(value);
-
 const DashboardPage = () => {
   const { error, status, summary } = useDashboardSummary();
   const isLoading = status === 'loading';
@@ -32,12 +26,14 @@ const DashboardPage = () => {
     {
       detail: `${summary.transactionCount} recorded transactions`,
       label: 'Total Spent',
-      value: formatCurrency(summary.totalSpent),
+      title: formatFullCurrency(summary.totalSpent),
+      value: formatCurrency(summary.totalSpent, { compact: true }),
     },
     {
       detail: monthLabel,
       label: 'This Month',
-      value: formatCurrency(summary.monthlySpent),
+      title: formatFullCurrency(summary.monthlySpent),
+      value: formatCurrency(summary.monthlySpent, { compact: true }),
     },
     {
       detail: 'All-time expense count',
@@ -46,34 +42,40 @@ const DashboardPage = () => {
     },
     {
       detail: summary.topCategory
-        ? formatCurrency(summary.topCategory.amount)
+        ? formatCurrency(summary.topCategory.amount, { compact: true })
         : 'Appears after expenses',
       label: 'Top Category',
+      title: summary.topCategory ? formatFullCurrency(summary.topCategory.amount) : undefined,
       value: summary.topCategory?.category ?? '-',
     },
   ];
 
   return (
-    <section className="page">
+    <section className="page dashboard-page">
       <header className="page-header">
         <div>
           <p className="section-kicker">Overview</p>
           <h2>Dashboard</h2>
           <span className="page-subtitle">Current spending health, budgets, and category movement.</span>
         </div>
+        <Link className="primary-button page-header-action" to="/expenses">
+          Add expense
+        </Link>
       </header>
 
       <div className="summary-grid" aria-label="Expense summary">
         {summaryCards.map((card) => (
           <article className="metric-card" key={card.label}>
             <p>{card.label}</p>
-            <strong>{isLoading ? '...' : card.value}</strong>
+            <strong className="money-value" title={card.title}>
+              {isLoading ? '...' : card.value}
+            </strong>
             <span>{card.detail}</span>
           </article>
         ))}
       </div>
 
-      <section className="panel">
+      <section className="panel insights-panel">
         <div>
           <p className="section-kicker">Insights</p>
           <h3>Monthly spending signals</h3>
@@ -97,7 +99,7 @@ const DashboardPage = () => {
         ) : null}
       </section>
 
-      <section className="panel">
+      <section className="panel activity-panel">
         <div>
           <p className="section-kicker">Activity</p>
           <h3>Recent spending</h3>
@@ -126,14 +128,16 @@ const DashboardPage = () => {
                   <strong>{expense.category}</strong>
                   <span>{expense.note || dateFormatter.format(new Date(expense.date))}</span>
                 </div>
-                <p>{formatCurrency(expense.amount)}</p>
+                <p className="money-value" title={formatFullCurrency(expense.amount)}>
+                  {formatCurrency(expense.amount, { compact: true })}
+                </p>
               </article>
             ))}
           </div>
         ) : null}
       </section>
 
-      <section className="panel">
+      <section className="panel chart-panel">
         <div>
           <p className="section-kicker">Categories</p>
           <h3>Spending by category</h3>
@@ -147,7 +151,7 @@ const DashboardPage = () => {
         {!isLoading && !isError ? <CategoryChart data={summary.categoryBreakdown} /> : null}
       </section>
 
-      <section className="panel">
+      <section className="panel budget-panel">
         <div>
           <p className="section-kicker">Budgets</p>
           <h3>Monthly category limits</h3>
