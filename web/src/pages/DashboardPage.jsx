@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import BudgetTracker from '../components/BudgetTracker.jsx';
 import CategoryChart from '../components/CategoryChart.jsx';
 import EmptyState from '../components/EmptyState.jsx';
@@ -57,6 +58,9 @@ const DashboardPage = () => {
           <h2>Dashboard</h2>
           <span className="page-subtitle">Current spending health, budgets, and category movement.</span>
         </div>
+        <Link className="primary-button page-header-action" to="/expenses">
+          Add expense
+        </Link>
       </header>
 
       <div className="summary-grid" aria-label="Expense summary">

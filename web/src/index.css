@@ -2221,6 +2221,15 @@ textarea {
   line-height: 1.55;
 }
 
+.page-header-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 132px;
+  text-decoration: none;
+}
+
 .insights-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -2251,6 +2260,10 @@ textarea {
 @media (max-width: 560px) {
   .insights-grid {
     grid-template-columns: 1fr;
+  }
+
+  .page-header-action {
+    width: 100%;
   }
 
   .insight-card span {
