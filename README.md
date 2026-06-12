@@ -27,7 +27,7 @@ A full-stack personal finance and expense tracking application built with React,
 - Recharts
 - date-fns
 - axios
-- CSS with responsive design and theme variables
+- Tailwind CSS with responsive utilities and dark mode support
 
 **Backend**
 - Node.js
