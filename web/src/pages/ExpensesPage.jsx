@@ -4,6 +4,7 @@ import ExpenseTable from '../components/ExpenseTable.jsx';
 import { EXPENSE_CATEGORIES } from '../hooks/useExpenseForm.js';
 import { useExpenses } from '../hooks/useExpenses.js';
 import { exportExpensesCsv } from '../utils/exportExpensesCsv.js';
+import { buttonClasses, cx, formClasses, layoutClasses } from '../utils/uiClasses.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -61,19 +62,19 @@ const ExpensesPage = () => {
   };
 
   return (
-    <section className="page expenses-page">
-      <header className="page-header">
+    <section className={`${layoutClasses.page} max-w-[1180px]`}>
+      <header className={layoutClasses.pageHeader}>
         <div>
-          <p className="section-kicker">Records</p>
-          <h2>Expenses</h2>
-          <span className="page-subtitle">Capture, review, filter, and export your expense ledger.</span>
+          <p className={layoutClasses.sectionKicker}>Records</p>
+          <h2 className={layoutClasses.pageTitle}>Expenses</h2>
+          <span className={layoutClasses.pageSubtitle}>Capture, review, filter, and export your expense ledger.</span>
         </div>
       </header>
 
-      <section className="panel form-panel">
+      <section className={layoutClasses.panel}>
         <div>
-          <p className="section-kicker">Capture</p>
-          <h3>{selectedExpense ? 'Edit expense' : 'Add expense'}</h3>
+          <p className={layoutClasses.sectionKicker}>Capture</p>
+          <h3 className={layoutClasses.panelTitle}>{selectedExpense ? 'Edit expense' : 'Add expense'}</h3>
         </div>
         <ExpenseForm
           initialExpense={selectedExpense}
@@ -82,16 +83,19 @@ const ExpensesPage = () => {
         />
       </section>
 
-      <section className="panel ledger-panel">
-        <div className="panel-heading-row">
+      <section className={layoutClasses.panel}>
+        <div className={layoutClasses.panelHeadingRow}>
           <div>
-            <p className="section-kicker">Ledger</p>
-            <h3>Expense list</h3>
+            <p className={layoutClasses.sectionKicker}>Ledger</p>
+            <h3 className={layoutClasses.panelTitle}>Expense list</h3>
           </div>
-          <div className="ledger-actions">
-            <label className="search-field">
-              <span>Search expenses</span>
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
+            <label className="grid w-full gap-1.5 lg:w-80">
+              <span className="text-xs font-extrabold uppercase tracking-normal text-slate-500 dark:text-slate-400">
+                Search expenses
+              </span>
               <input
+                className={formClasses.input}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder="Search note, category, amount"
                 type="search"
@@ -99,7 +103,7 @@ const ExpensesPage = () => {
               />
             </label>
             <button
-              className="secondary-button"
+              className={buttonClasses.secondary}
               disabled={filteredExpenses.length === 0}
               onClick={() => exportExpensesCsv(filteredExpenses)}
               type="button"
@@ -108,10 +112,15 @@ const ExpensesPage = () => {
             </button>
           </div>
         </div>
-        <div className="filter-row" aria-label="Filter by category">
+        <div className="flex flex-wrap gap-2.5" aria-label="Filter by category">
           {['All', ...EXPENSE_CATEGORIES].map((category) => (
             <button
-              className={categoryFilter === category ? 'filter-chip active' : 'filter-chip'}
+              className={cx(
+                'min-h-9 rounded-full border px-3 py-2 text-sm font-extrabold',
+                categoryFilter === category
+                  ? 'border-emerald-700 bg-emerald-50 text-emerald-800 dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-200'
+                  : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 dark:border-slate-500/20 dark:bg-white/5 dark:text-slate-300 dark:hover:border-emerald-400/40 dark:hover:bg-emerald-400/10 dark:hover:text-emerald-200',
+              )}
               key={category}
               onClick={() => setCategoryFilter(category)}
               type="button"

@@ -5,6 +5,7 @@ import EmptyState from '../components/EmptyState.jsx';
 import MonthlyInsights from '../components/MonthlyInsights.jsx';
 import { useDashboardSummary } from '../hooks/useDashboardSummary.js';
 import { formatCurrency, formatFullCurrency } from '../utils/formatCurrency.js';
+import { buttonClasses, cardClasses, layoutClasses } from '../utils/uiClasses.js';
 
 const dateFormatter = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -51,34 +52,39 @@ const DashboardPage = () => {
   ];
 
   return (
-    <section className="page dashboard-page">
-      <header className="page-header">
+    <section className={`${layoutClasses.page} grid-cols-1 lg:grid-cols-12`}>
+      <header className={`${layoutClasses.pageHeader} lg:col-span-12`}>
         <div>
-          <p className="section-kicker">Overview</p>
-          <h2>Dashboard</h2>
-          <span className="page-subtitle">Current spending health, budgets, and category movement.</span>
+          <p className={layoutClasses.sectionKicker}>Overview</p>
+          <h2 className={layoutClasses.pageTitle}>Dashboard</h2>
+          <span className={layoutClasses.pageSubtitle}>
+            Current spending health, budgets, and category movement.
+          </span>
         </div>
-        <Link className="primary-button page-header-action" to="/expenses">
+        <Link className={`${buttonClasses.primary} w-full sm:w-auto sm:min-w-32`} to="/expenses">
           Add expense
         </Link>
       </header>
 
-      <div className="summary-grid" aria-label="Expense summary">
+      <div className="grid gap-4 sm:grid-cols-2 lg:col-span-12 lg:grid-cols-4" aria-label="Expense summary">
         {summaryCards.map((card) => (
-          <article className="metric-card" key={card.label}>
-            <p>{card.label}</p>
-            <strong className="money-value" title={card.title}>
+          <article className={cardClasses.metric} key={card.label}>
+            <p className="m-0 text-sm font-bold text-slate-500 dark:text-slate-400">{card.label}</p>
+            <strong
+              className="inline-block max-w-full truncate align-bottom font-display text-3xl font-black leading-none text-slate-950 dark:text-slate-50"
+              title={card.title}
+            >
               {isLoading ? '...' : card.value}
             </strong>
-            <span>{card.detail}</span>
+            <span className="text-sm font-semibold leading-6 text-slate-500 dark:text-slate-400">{card.detail}</span>
           </article>
         ))}
       </div>
 
-      <section className="panel insights-panel">
+      <section className={`${layoutClasses.panel} lg:col-span-6`}>
         <div>
-          <p className="section-kicker">Insights</p>
-          <h3>Monthly spending signals</h3>
+          <p className={layoutClasses.sectionKicker}>Insights</p>
+          <h3 className={layoutClasses.panelTitle}>Monthly spending signals</h3>
         </div>
         {isLoading ? (
           <EmptyState
@@ -99,10 +105,10 @@ const DashboardPage = () => {
         ) : null}
       </section>
 
-      <section className="panel activity-panel">
+      <section className={`${layoutClasses.panel} lg:col-span-6`}>
         <div>
-          <p className="section-kicker">Activity</p>
-          <h3>Recent spending</h3>
+          <p className={layoutClasses.sectionKicker}>Activity</p>
+          <h3 className={layoutClasses.panelTitle}>Recent spending</h3>
         </div>
         {isLoading ? (
           <EmptyState
@@ -121,14 +127,22 @@ const DashboardPage = () => {
           />
         ) : null}
         {!isLoading && !isError && summary.recentExpenses.length > 0 ? (
-          <div className="recent-list">
+          <div className="grid gap-3">
             {summary.recentExpenses.map((expense) => (
-              <article className="recent-item" key={expense._id}>
-                <div>
-                  <strong>{expense.category}</strong>
-                  <span>{expense.note || dateFormatter.format(new Date(expense.date))}</span>
+              <article
+                className="flex min-h-16 items-center justify-between gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 hover:-translate-y-0.5 dark:border-slate-500/20 dark:bg-white/[0.035] dark:hover:border-emerald-400/30"
+                key={expense._id}
+              >
+                <div className="grid min-w-0 gap-1">
+                  <strong className="text-slate-950 dark:text-slate-50">{expense.category}</strong>
+                  <span className="truncate text-sm font-semibold text-slate-500 dark:text-slate-400">
+                    {expense.note || dateFormatter.format(new Date(expense.date))}
+                  </span>
                 </div>
-                <p className="money-value" title={formatFullCurrency(expense.amount)}>
+                <p
+                  className="m-0 max-w-[42%] truncate font-black text-slate-950 dark:text-slate-50"
+                  title={formatFullCurrency(expense.amount)}
+                >
                   {formatCurrency(expense.amount, { compact: true })}
                 </p>
               </article>
@@ -137,10 +151,10 @@ const DashboardPage = () => {
         ) : null}
       </section>
 
-      <section className="panel chart-panel">
+      <section className={`${layoutClasses.panel} lg:col-span-12`}>
         <div>
-          <p className="section-kicker">Categories</p>
-          <h3>Spending by category</h3>
+          <p className={layoutClasses.sectionKicker}>Categories</p>
+          <h3 className={layoutClasses.panelTitle}>Spending by category</h3>
         </div>
         {isLoading ? (
           <EmptyState description="Preparing category totals." title="Loading chart" tone="loading" />
@@ -151,10 +165,10 @@ const DashboardPage = () => {
         {!isLoading && !isError ? <CategoryChart data={summary.categoryBreakdown} /> : null}
       </section>
 
-      <section className="panel budget-panel">
+      <section className={`${layoutClasses.panel} lg:col-span-12`}>
         <div>
-          <p className="section-kicker">Budgets</p>
-          <h3>Monthly category limits</h3>
+          <p className={layoutClasses.sectionKicker}>Budgets</p>
+          <h3 className={layoutClasses.panelTitle}>Monthly category limits</h3>
         </div>
         {isLoading ? (
           <EmptyState

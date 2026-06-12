@@ -1,4 +1,5 @@
 import { EXPENSE_CATEGORIES, useExpenseForm } from '../hooks/useExpenseForm.js';
+import { buttonClasses, cx, formClasses } from '../utils/uiClasses.js';
 
 const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
   const {
@@ -14,14 +15,20 @@ const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
   } = useExpenseForm({ initialExpense, onSuccess });
 
   const isSubmitting = status === 'submitting';
+  const messageClass = cx(
+    'min-h-6 m-0 text-sm font-bold text-slate-500 dark:text-slate-400',
+    status === 'success' && 'text-emerald-700 dark:text-emerald-300',
+    status === 'error' && 'text-red-700 dark:text-red-300',
+  );
 
   return (
-    <form className="expense-form" onSubmit={handleSubmit}>
-      <div className="form-grid">
-        <label className="field">
-          <span>Amount</span>
+    <form className="grid gap-5" onSubmit={handleSubmit}>
+      <div className="grid gap-4 lg:grid-cols-3">
+        <label className={formClasses.field}>
+          <span className={formClasses.label}>Amount</span>
           <input
             aria-invalid={Boolean(errors.amount)}
+            className={formClasses.input}
             inputMode="decimal"
             min="0.01"
             name="amount"
@@ -31,13 +38,14 @@ const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
             type="number"
             value={values.amount}
           />
-          {errors.amount ? <small>{errors.amount}</small> : null}
+          {errors.amount ? <small className={formClasses.errorText}>{errors.amount}</small> : null}
         </label>
 
-        <label className="field">
-          <span>Category</span>
+        <label className={formClasses.field}>
+          <span className={formClasses.label}>Category</span>
           <select
             aria-invalid={Boolean(errors.category)}
+            className={formClasses.input}
             name="category"
             onChange={handleChange}
             value={values.category}
@@ -48,26 +56,28 @@ const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
               </option>
             ))}
           </select>
-          {errors.category ? <small>{errors.category}</small> : null}
+          {errors.category ? <small className={formClasses.errorText}>{errors.category}</small> : null}
         </label>
 
-        <label className="field">
-          <span>Date</span>
+        <label className={formClasses.field}>
+          <span className={formClasses.label}>Date</span>
           <input
             aria-invalid={Boolean(errors.date)}
+            className={formClasses.input}
             max={maxDate}
             name="date"
             onChange={handleChange}
             type="date"
             value={values.date}
           />
-          {errors.date ? <small>{errors.date}</small> : null}
+          {errors.date ? <small className={formClasses.errorText}>{errors.date}</small> : null}
         </label>
 
-        <label className="field field-wide">
-          <span>Note</span>
+        <label className={`${formClasses.field} lg:col-span-3`}>
+          <span className={formClasses.label}>Note</span>
           <textarea
             aria-invalid={Boolean(errors.note)}
+            className={`${formClasses.input} min-h-28 resize-y`}
             maxLength={240}
             name="note"
             onChange={handleChange}
@@ -75,19 +85,19 @@ const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
             rows="4"
             value={values.note}
           />
-          {errors.note ? <small>{errors.note}</small> : null}
+          {errors.note ? <small className={formClasses.errorText}>{errors.note}</small> : null}
         </label>
       </div>
 
-      <div className="form-footer">
-        <p className={`form-message ${status}`} role="status">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <p className={messageClass} role="status">
           {message}
         </p>
-        <div className="form-actions">
-          <button className="secondary-button" onClick={isEditing ? onCancel : resetForm} type="button">
+        <div className="flex flex-wrap justify-end gap-2.5">
+          <button className={buttonClasses.secondary} onClick={isEditing ? onCancel : resetForm} type="button">
             {isEditing ? 'Cancel edit' : 'Reset'}
           </button>
-          <button className="primary-button" disabled={isSubmitting} type="submit">
+          <button className={buttonClasses.primary} disabled={isSubmitting} type="submit">
             {isSubmitting ? 'Saving...' : isEditing ? 'Update expense' : 'Add expense'}
           </button>
         </div>

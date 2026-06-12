@@ -21,7 +21,10 @@ const CategoryChart = ({ data }) => {
   }
 
   return (
-    <div className="chart-frame" aria-label="Spending by category">
+    <div
+      className="min-h-[280px] w-full rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-slate-500/20 dark:bg-white/[0.035] sm:min-h-[330px] sm:p-5"
+      aria-label="Spending by category"
+    >
       <ResponsiveContainer height={280} width="100%">
         <BarChart data={data} margin={{ bottom: 0, left: 0, right: 8, top: 10 }}>
           <CartesianGrid stroke="#e6eee9" strokeDasharray="4 4" vertical={false} />
