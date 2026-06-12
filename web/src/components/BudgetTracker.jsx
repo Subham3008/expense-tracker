@@ -9,7 +9,7 @@ const BudgetTracker = ({ monthlyCategoryBreakdown }) => {
     <div className="grid gap-3">
       {budgetRows.map((row) => (
         <article
-          className="grid gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 hover:-translate-y-0.5 dark:border-slate-500/20 dark:bg-white/[0.035] dark:hover:border-emerald-400/30"
+          className="grid gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 hover:-translate-y-0.5 dark:border-zinc-800 dark:bg-[#0d0d0d] dark:hover:border-zinc-600"
           key={row.category}
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -46,10 +46,10 @@ const BudgetTracker = ({ monthlyCategoryBreakdown }) => {
               className={cx(
                 'absolute inset-y-0 left-0 rounded-full',
                 row.status === 'over'
-                  ? 'bg-red-600 dark:bg-gradient-to-r dark:from-red-400 dark:to-red-300'
+                  ? 'bg-red-600 dark:bg-red-400'
                   : row.status === 'warning'
-                    ? 'bg-amber-500 dark:bg-gradient-to-r dark:from-amber-300 dark:to-amber-200'
-                    : 'bg-emerald-700 dark:bg-gradient-to-r dark:from-emerald-400 dark:to-emerald-300',
+                    ? 'bg-amber-500 dark:bg-zinc-400'
+                    : 'bg-emerald-700 dark:bg-zinc-200',
               )}
               style={{ width: `${Math.min(row.percentage, 100)}%` }}
             />

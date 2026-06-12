@@ -17,7 +17,7 @@ const ExpenseForm = ({ initialExpense, onCancel = () => {}, onSuccess }) => {
   const isSubmitting = status === 'submitting';
   const messageClass = cx(
     'min-h-6 m-0 text-sm font-bold text-slate-500 dark:text-slate-400',
-    status === 'success' && 'text-emerald-700 dark:text-emerald-300',
+    status === 'success' && 'text-emerald-700 dark:text-zinc-200',
     status === 'error' && 'text-red-700 dark:text-red-300',
   );
 

@@ -130,7 +130,7 @@ const DashboardPage = () => {
           <div className="grid gap-3">
             {summary.recentExpenses.map((expense) => (
               <article
-                className="flex min-h-16 items-center justify-between gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 hover:-translate-y-0.5 dark:border-slate-500/20 dark:bg-white/[0.035] dark:hover:border-emerald-400/30"
+                className="flex min-h-16 items-center justify-between gap-4 rounded-lg border border-slate-200 bg-slate-50 p-4 hover:-translate-y-0.5 dark:border-zinc-800 dark:bg-[#0d0d0d] dark:hover:border-zinc-600"
                 key={expense._id}
               >
                 <div className="grid min-w-0 gap-1">

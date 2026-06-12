@@ -54,12 +54,12 @@ const MonthlyInsights = ({ averageDailySpend, insights, monthlySpent }) => {
       {insightCards.map((card) => (
         <article
           className={cx(
-            'grid min-h-36 min-w-0 content-start gap-2.5 rounded-lg border p-4 hover:-translate-y-0.5 dark:hover:border-emerald-400/30',
+            'grid min-h-36 min-w-0 content-start gap-2.5 rounded-lg border p-4 hover:-translate-y-0.5 dark:hover:border-zinc-600',
             card.tone === 'good'
-              ? 'border-emerald-200 bg-emerald-50 dark:border-emerald-400/30 dark:bg-emerald-400/10'
+              ? 'border-emerald-200 bg-emerald-50 dark:border-zinc-700 dark:bg-zinc-900'
               : card.tone === 'warning'
                 ? 'border-amber-200 bg-amber-50 dark:border-amber-300/30 dark:bg-amber-300/10'
-                : 'border-slate-200 bg-slate-50 dark:border-slate-500/20 dark:bg-white/[0.035]',
+                : 'border-slate-200 bg-slate-50 dark:border-zinc-800 dark:bg-[#0d0d0d]',
           )}
           key={card.label}
         >
