@@ -118,8 +118,8 @@ const ExpensesPage = () => {
               className={cx(
                 'min-h-9 rounded-full border px-3 py-2 text-sm font-extrabold',
                 categoryFilter === category
-                  ? 'border-emerald-700 bg-emerald-50 text-emerald-800 dark:border-emerald-400/40 dark:bg-emerald-400/10 dark:text-emerald-200'
-                  : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 dark:border-slate-500/20 dark:bg-white/5 dark:text-slate-300 dark:hover:border-emerald-400/40 dark:hover:bg-emerald-400/10 dark:hover:text-emerald-200',
+                  ? 'border-emerald-700 bg-emerald-50 text-emerald-800 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50'
+                  : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 dark:border-zinc-800 dark:bg-[#0d0d0d] dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-900 dark:hover:text-zinc-100',
               )}
               key={category}
               onClick={() => setCategoryFilter(category)}

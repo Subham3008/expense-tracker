@@ -19,7 +19,7 @@ const EmptyState = ({ action, description, tone = 'neutral', title }) => {
           'grid size-11 place-items-center rounded-lg font-black',
           isError
             ? 'bg-red-100 text-red-700 dark:bg-red-400/15 dark:text-red-200'
-            : 'bg-emerald-50 text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-200',
+            : 'bg-emerald-50 text-emerald-800 dark:bg-zinc-900 dark:text-zinc-200',
         )}
         aria-hidden="true"
       >

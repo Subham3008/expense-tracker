@@ -62,10 +62,10 @@ const ExpenseTable = ({ error, expenses, isFiltered = false, onDelete, onEdit, s
         </thead>
         <tbody>
           {expenses.map((expense) => (
-            <tr className="hover:bg-slate-50 dark:hover:bg-emerald-400/[0.055]" key={expense._id}>
+            <tr className="hover:bg-slate-50 dark:hover:bg-zinc-900" key={expense._id}>
               <td className="border-b border-slate-200 px-4 py-3.5 text-left text-slate-700 dark:border-slate-500/15 dark:text-slate-100" data-label="Date">{formatDate(expense.date)}</td>
               <td className="border-b border-slate-200 px-4 py-3.5 text-left text-slate-700 dark:border-slate-500/15 dark:text-slate-100" data-label="Category">
-                <span className="inline-flex min-h-7 items-center rounded-full bg-emerald-50 px-2.5 py-1 text-sm font-extrabold text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-200">{expense.category}</span>
+                <span className="inline-flex min-h-7 items-center rounded-full bg-emerald-50 px-2.5 py-1 text-sm font-extrabold text-emerald-800 dark:bg-zinc-900 dark:text-zinc-200">{expense.category}</span>
               </td>
               <td className="border-b border-slate-200 px-4 py-3.5 text-left text-slate-700 dark:border-slate-500/15 dark:text-slate-100" data-label="Note">{expense.note || '-'}</td>
               <td className="max-w-36 whitespace-nowrap border-b border-slate-200 px-4 py-3.5 text-right text-slate-700 dark:border-slate-500/15 dark:text-slate-100" data-label="Amount">
