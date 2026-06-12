@@ -54,7 +54,7 @@ const DashboardPage = () => {
   ];
 
   return (
-    <section className="page">
+    <section className="page dashboard-page">
       <header className="page-header">
         <div>
           <p className="section-kicker">Overview</p>
@@ -73,7 +73,7 @@ const DashboardPage = () => {
         ))}
       </div>
 
-      <section className="panel">
+      <section className="panel insights-panel">
         <div>
           <p className="section-kicker">Insights</p>
           <h3>Monthly spending signals</h3>
@@ -97,7 +97,7 @@ const DashboardPage = () => {
         ) : null}
       </section>
 
-      <section className="panel">
+      <section className="panel activity-panel">
         <div>
           <p className="section-kicker">Activity</p>
           <h3>Recent spending</h3>
@@ -133,7 +133,7 @@ const DashboardPage = () => {
         ) : null}
       </section>
 
-      <section className="panel">
+      <section className="panel chart-panel">
         <div>
           <p className="section-kicker">Categories</p>
           <h3>Spending by category</h3>
@@ -147,7 +147,7 @@ const DashboardPage = () => {
         {!isLoading && !isError ? <CategoryChart data={summary.categoryBreakdown} /> : null}
       </section>
 
-      <section className="panel">
+      <section className="panel budget-panel">
         <div>
           <p className="section-kicker">Budgets</p>
           <h3>Monthly category limits</h3>

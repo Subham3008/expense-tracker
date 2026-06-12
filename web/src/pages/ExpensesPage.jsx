@@ -61,7 +61,7 @@ const ExpensesPage = () => {
   };
 
   return (
-    <section className="page">
+    <section className="page expenses-page">
       <header className="page-header">
         <div>
           <p className="section-kicker">Records</p>
@@ -70,7 +70,7 @@ const ExpensesPage = () => {
         </div>
       </header>
 
-      <section className="panel">
+      <section className="panel form-panel">
         <div>
           <p className="section-kicker">Capture</p>
           <h3>{selectedExpense ? 'Edit expense' : 'Add expense'}</h3>
@@ -82,7 +82,7 @@ const ExpensesPage = () => {
         />
       </section>
 
-      <section className="panel">
+      <section className="panel ledger-panel">
         <div className="panel-heading-row">
           <div>
             <p className="section-kicker">Ledger</p>
